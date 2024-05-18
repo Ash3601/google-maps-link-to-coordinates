@@ -61,7 +61,9 @@
       const expandedUrl = document.getElementById("mapsLink").value; 
 
       // Extract coordinates (same logic as before)
-      const regex = /@(-?\d+\.\d+),(-?\d+\.\d+)(?:,[^,]+)?\//;
+    //   const regex = /@(-?\d+\.\d+),(-?\d+\.\d+)(?:,[^,]+)?\//;
+      const regex = /@(-?\d+\.\d+),(-?\d+\.\d+)(?:,[^,]+)?(?:\/|$)/; // Updated regex
+
       const match = expandedUrl.match(regex);
 
       if (match) {
