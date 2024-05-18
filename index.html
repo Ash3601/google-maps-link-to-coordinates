@@ -1,54 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    body {
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      background-color: #f4f4f4;
-      margin: 0;
-    }
+<style>
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px; /* Add padding for better spacing on mobile */
+}
 
-    h2 {
-      color: #333;
-    }
+h2 {
+    color: #333;
+    text-align: center; /* Center the heading */
+}
 
-    #mapsLink {
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      width: 300px;
-    }
+#mapsLink {
+    padding: 15px; /* Increase padding for touchscreens */
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Slightly larger radius for softer look */
+    width: calc(100% - 30px); /* Take up full width with padding */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+}
 
-    button {
-      padding: 10px 15px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+button {
+    padding: 15px;  /* Increase padding for touchscreens */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px; 
+    cursor: pointer;
+    width: calc(100% - 30px); /* Take up full width with padding */
+    box-sizing: border-box; 
+}
 
-    button:hover {
-      background-color: #45a049;
-    }
+button:hover {
+    background-color: #45a049;
+}
 
-    #result {
-      margin-top: 20px;
-      font-size: 18px;
-    }
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    word-break: break-all; /* Allow long coordinates to break onto multiple lines */
+}
 
-    @media (max-width: 600px) { 
-      /* Styles for screens smaller than 600px (adjust as needed) */
-      #mapsLink { width: 90%; }
-      button { width: 100%; margin-bottom: 10px; }
-    }    
-  </style>
+@media (max-width: 600px) {
+    #mapsLink, button {
+        width: 100%; /* Full width on small screens */
+    }
+}
+</style>
 </head>
 <body>
     <h2>Get Coordinates</h2>
