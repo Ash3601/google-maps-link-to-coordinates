@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    #mapsLink {
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 300px;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    @media (max-width: 600px) { 
+      /* Styles for screens smaller than 600px (adjust as needed) */
+      #mapsLink { width: 90%; }
+      button { width: 100%; margin-bottom: 10px; }
+    }    
+  </style>
+</head>
+<body>
+    <h2>Get Coordinates</h2>
+    <input type="url" id="mapsLink" placeholder="Paste Maps Link" autofocus>
+    <button onclick="getCoordinates()">Get Coordinates</button>
+    <p id="result"></p>
+
+  <script>
+    function getCoordinates() {
+      const expandedUrl = document.getElementById("mapsLink").value; 
+
+      // Extract coordinates (same logic as before)
+      const regex = /@(-?\d+\.\d+),(-?\d+\.\d+)(?:,[^,]+)?\//;
+      const match = expandedUrl.match(regex);
+
+      if (match) {
+        const coord1 = match[1];
+        const coord2 = match[2];
+        document.getElementById("result").innerHTML = `(${coord1}, ${coord2}) <button id="copyButton" onclick="copyCoordinates()">Copy</button>`;
+      } else {
+        const url = new URL(expandedUrl);
+        const ll = url.searchParams.get("ll");
+        if (ll) {
+          const [coord1, coord2] = ll.split(",");
+          document.getElementById("result").innerHTML = `(${coord1}, ${coord2}) <button id="copyButton" onclick="copyCoordinates()">Copy</button>`;
+        } else {
+          document.getElementById("result").innerHTML = "Invalid link format";
+        }
+      }   
+    }
+
+    function copyCoordinates() {
+      const coordinatesText = document.getElementById("result").textContent.trim().replace(" Copy", "");
+      const tempInput = document.createElement("input");
+      tempInput.value = coordinatesText;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      // Replace alert with checkmark icon
+      const copyButton = document.getElementById("copyButton");
+      copyButton.innerHTML = "&#10004;"; // Unicode character for checkmark
+      copyButton.disabled = true; 
+    //   alert("Coordinates copied to clipboard!");
+    }
+    document.getElementById("mapsLink").focus();
+  </script>
+</body>
+</html>
