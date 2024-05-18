@@ -43,6 +43,14 @@
       font-size: 18px;
     }
 
+    button:nth-child(2) {  /* Targets the second button (Clear) */
+      background-color: #FF6347; /* Tomato (slightly red) color */
+    }
+
+    button:nth-child(2):hover {
+      background-color: #FF4500; /* OrangeRed (darker on hover) */
+    }
+
     @media (max-width: 600px) { 
       /* Styles for screens smaller than 600px (adjust as needed) */
       #mapsLink { width: 90%; }
@@ -53,7 +61,11 @@
 <body>
     <h2>Get Coordinates</h2>
     <input type="url" id="mapsLink" placeholder="Paste Maps Link" autofocus>
-    <button onclick="getCoordinates()">Get Coordinates</button>
+    <!-- <button onclick="getCoordinates()">Get Coordinates</button> -->
+    <div> 
+        <button onclick="getCoordinates()">Get Coordinates</button>
+        <button onclick="clearInput()">Clear</button> 
+      </div>    
     <p id="result"></p>
 
   <script>
@@ -94,13 +106,16 @@
       const copyButton = document.getElementById("copyButton");
       copyButton.innerHTML = "&#10004;"; // Unicode character for checkmark
       copyButton.disabled = true; 
-    //   alert("Coordinates copied to clipboard!");
+      document.getElementById("mapsLink").value = "";
     }
     document.getElementById("mapsLink").focus();
     window.onload = function() {
     document.getElementById("mapsLink").focus();
     };
-
+    function clearInput() {
+      document.getElementById("mapsLink").value = "";
+      document.getElementById("result").innerHTML = ""; // Also clear the result
+    }
   </script>
 </body>
 </html>
